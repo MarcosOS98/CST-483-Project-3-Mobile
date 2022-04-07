@@ -21,3 +21,6 @@ Room Databases tutorial - https://www.youtube.com/watch?v=qO56SL856xc&list=PLdHg
 
 Retrofit:
 https://guides.codepath.com/android/consuming-apis-with-retrofit
+
+Shared Preferences:
+https://developer.android.com/reference/android/content/SharedPreferences
