@@ -27,3 +27,6 @@ https://developer.android.com/reference/android/content/SharedPreferences
 
 Android Security library:
 https://developer.android.com/jetpack/androidx/releases/security
+
+OAuth2:
+https://developer.android.com/training/id-auth/authenticate
