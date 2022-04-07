@@ -24,3 +24,6 @@ https://guides.codepath.com/android/consuming-apis-with-retrofit
 
 Shared Preferences:
 https://developer.android.com/reference/android/content/SharedPreferences
+
+Android Security library:
+https://developer.android.com/jetpack/androidx/releases/security
