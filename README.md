@@ -19,7 +19,9 @@ Mockup:
 
 Tech Stack:
 Heroku - JawsDB - MySQL
+
 SpringBoot - Thymeleaf
+
 Android
 
 API:
