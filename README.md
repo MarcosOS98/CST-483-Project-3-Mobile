@@ -21,6 +21,7 @@ Tech Stack:
 Heroku - JawsDB - MySQL
 SpringBoot - Thymeleat
 Android
+
 API:
 In Progress
 
