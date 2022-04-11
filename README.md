@@ -19,7 +19,7 @@ Mockup:
 
 Tech Stack:
 Heroku - JawsDB - MySQL
-SpringBoot - Thymeleat
+SpringBoot - Thymeleaf
 Android
 
 API:
