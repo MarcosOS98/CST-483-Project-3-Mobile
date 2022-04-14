@@ -2,4 +2,7 @@
     <string name="app_name">Project 3 Mobile</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="prompt_email">prompt_email</string>
+    <string name="prompt_password">prompt_password</string>
+    <string name="action_sign_in">action_sign_in</string>
 </resources>
