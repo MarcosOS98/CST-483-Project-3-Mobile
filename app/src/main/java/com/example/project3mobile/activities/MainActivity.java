@@ -1,8 +1,10 @@
-package com.example.project3mobile;
+package com.example.project3mobile.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 import android.os.Bundle;
+
+import com.example.project3mobile.R;
 
 public class MainActivity extends AppCompatActivity {
 

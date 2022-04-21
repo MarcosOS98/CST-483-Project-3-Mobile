@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project3Mobile">
         <activity
-            android:name=".LandingActivity"
+            android:name=".activities.LandingActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
