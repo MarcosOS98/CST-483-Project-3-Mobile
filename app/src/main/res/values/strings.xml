@@ -8,4 +8,5 @@
     <string name="action_sign_in">action_sign_in</string>
     <string name="prompt_username">Enter Username</string>
     <string name="create_account">create_account</string>
+    <string name="register">register</string>
 </resources>

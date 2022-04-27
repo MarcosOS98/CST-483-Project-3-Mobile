@@ -2,65 +2,99 @@ package com.example.project3mobile.fragments;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.room.Room;
+
+import com.example.project3mobile.AppStorage.AppDatabase;
+import com.example.project3mobile.AppStorage.UserDAO;
 import com.example.project3mobile.R;
+import com.example.project3mobile.User;
+import com.example.project3mobile.databinding.FragmentLoginBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LoginFragment extends Fragment {
+    private EditText mUsername;
+    private EditText mPassword;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String mUsername = "username";
-    private static final String mPassword = "password";
+    private Button mButton;
+    private UserDAO mUserDAO;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String mUserString;
+    private String mPasswordString;
+    private User mUser;
 
-    public LoginFragment() {
-        // Required empty public constructor
-    }
+    private FragmentLoginBinding binding;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LoginFragment newInstance(String param1, String param2) {
-        LoginFragment fragment = new LoginFragment();
-        Bundle args = new Bundle();
-        args.putString(mUsername, param1);
-        args.putString(mPassword, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private Boolean LoginDisplay() {
+        mUsername = mUsername.findViewById(R.id.username);
+        mPassword = mPassword.findViewById(R.id.password);
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(mUsername);
-            mParam2 = getArguments().getString(mPassword);
+        mUserString = (String) mUsername.getText().toString();
+        mPasswordString = (String) mPassword.getText().toString();
+
+        if(checkDatabase()) {
+            if(!mUser.getPassword().equals(mPasswordString)) {
+                Toast.makeText(getContext(), "Invalid Password", Toast.LENGTH_SHORT).show();
+                return false;
+            } else {
+                return true;
+            }
         }
+        return false;
+    }
+
+    private boolean checkDatabase() {
+        mUser = mUserDAO.getUserByUsername(mUserString);
+        if(mUser == null) {
+            Toast.makeText(getContext(), "No User Found", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+    private void getDatabase() {
+        mUserDAO = Room.databaseBuilder(getContext(), AppDatabase.class, AppDatabase.USER_TABLE)
+                .allowMainThreadQueries()
+                .build()
+                .getUserDAO();
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(LoginFragment.this)
+                        .navigate(R.id.action_loginFragment_to_registerFragment);
+            }
+        });
+
+        binding.loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(LoginFragment.this)
+                        .navigate(R.id.action_loginFragment_to_landingFragment);
+            }
+        });
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+
+
+        binding = FragmentLoginBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+       
+
     }
 }
