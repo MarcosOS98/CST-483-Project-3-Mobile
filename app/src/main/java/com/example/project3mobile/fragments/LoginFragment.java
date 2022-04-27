@@ -1,6 +1,7 @@
 package com.example.project3mobile.fragments;
 
 import android.os.Bundle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,13 +84,17 @@ public class LoginFragment extends Fragment {
                         .navigate(R.id.action_loginFragment_to_landingFragment);
             }
         });
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
+
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
+       
+
     }
 }
