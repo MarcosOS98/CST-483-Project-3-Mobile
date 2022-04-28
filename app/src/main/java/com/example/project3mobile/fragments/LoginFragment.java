@@ -1,5 +1,7 @@
 package com.example.project3mobile.fragments;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -24,18 +26,30 @@ public class LoginFragment extends Fragment {
     private EditText mUsername;
     private EditText mPassword;
 
-    private Button mButton;
+    private Button mLoginBtn;
+    private Button mRegisterBtn;
     private UserDAO mUserDAO;
 
     private String mUserString;
     private String mPasswordString;
     private User mUser;
-
+    AppDatabase appDB;
     private FragmentLoginBinding binding;
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentLoginBinding.inflate(inflater, container, false);
+        //appDB = AppDatabase.getInstance(this.getActivity());
+        return binding.getRoot();
+    }
+
     private Boolean LoginDisplay() {
+        getActivity();
         mUsername = mUsername.findViewById(R.id.username);
         mPassword = mPassword.findViewById(R.id.password);
+        mLoginBtn = mLoginBtn.findViewById(R.id.loginButton);
+        mRegisterBtn = mRegisterBtn.findViewById(R.id.registerButton);
 
         mUserString = (String) mUsername.getText().toString();
         mPasswordString = (String) mPassword.getText().toString();
@@ -52,6 +66,7 @@ public class LoginFragment extends Fragment {
     }
 
     private boolean checkDatabase() {
+        getDatabase();
         mUser = mUserDAO.getUserByUsername(mUserString);
         if(mUser == null) {
             Toast.makeText(getContext(), "No User Found", Toast.LENGTH_SHORT).show();
@@ -65,36 +80,35 @@ public class LoginFragment extends Fragment {
                 .build()
                 .getUserDAO();
     }
+    public static Intent intentFactory(Context context) {
+        Intent intent = new Intent(context, LoginFragment.class);
+        return intent;
+    }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         binding.registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(LoginFragment.this)
-                        .navigate(R.id.action_loginFragment_to_registerFragment);
+                        .navigate(R.id.action_LoginFragment_to_RegisterFragment);
             }
         });
 
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(LoginFragment.this)
-                        .navigate(R.id.action_loginFragment_to_landingFragment);
+                if (LoginDisplay()) {
+                    NavHostFragment.findNavController(LoginFragment.this)
+                            .navigate(R.id.action_LoginFragment_to_LandingFragment);
+                }
             }
         });
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-
-        binding = FragmentLoginBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-       
-
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
