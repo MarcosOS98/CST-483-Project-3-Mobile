@@ -1,7 +1,7 @@
 package com.example.project3mobile.fragments;
 
-/** The primary fragment for a student, listing all assignments due for all enrolled classes plus
- * due dates
+/** The fragment for a single class, listing all assignments due for only that class. Very similar
+ * to StudentHome, but using a different data set for the recycler.
  * @author Andrew Liddle
  */
 
@@ -16,24 +16,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.project3mobile.R;
+import com.example.project3mobile.adapters.StudentRowAdapter;
+import com.example.project3mobile.databinding.FragmentClassBinding;
 import com.example.project3mobile.databinding.FragmentStudentHomeBinding;
 
-public class StudentHomeFragment extends Fragment {
+public class ClassFragment extends Fragment {
 
-    private FragmentStudentHomeBinding binding;
+    private FragmentClassBinding binding;
     RecyclerView recyclerView;
-    // <-- Data initialized here again?
 
     // TODO: ADD DISPLAY-ASSIGNMENT FUNCTIONALITY TO ITEMS OF RECYCLER
 
-    public StudentHomeFragment() {
+    public ClassFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentStudentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentClassBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
         recyclerView = binding.recycler;
