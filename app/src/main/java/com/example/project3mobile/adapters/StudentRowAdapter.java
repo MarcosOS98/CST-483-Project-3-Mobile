@@ -18,7 +18,14 @@ public class StudentRowAdapter extends RecyclerView.Adapter<StudentRowAdapter.Vi
     private StudentRowItemBinding binding;
     private Context context;
 
-    // TODO: DATA INITIALIZATION IN ARRAY/LIST WOULD GO HERE
+    // TODO: vvv DATA INITIALIZATION IN ARRAY/LIST WOULD GO HERE vvv
+
+    /*List<Assignments> list;  <-- not sure if this is needed
+
+    public StudentRowAdapter(List<> list, Context context){
+        this.list = list;
+        this.context = context;
+    }*/
 
     @NonNull
     @Override
@@ -31,7 +38,10 @@ public class StudentRowAdapter extends RecyclerView.Adapter<StudentRowAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull StudentRowAdapter.ViewHolder holder, int position) {
-        // TODO: FILLING THE LIST WITH DATA WITH .GET'S GOES HERE
+        // TODO: vvv FILLING THE LIST WITH DATA WITH .GET'S GOES HERE vvv
+        //holder.className.setText(list.get(position).getName());
+        //holder.assignmentName.setText(list.get(position).getName());
+        //holder.dueDate.setText(list.get(position).getName());
     }
 
     @Override
