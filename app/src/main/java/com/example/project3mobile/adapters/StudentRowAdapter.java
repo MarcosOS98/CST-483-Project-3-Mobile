@@ -44,12 +44,14 @@ public class StudentRowAdapter extends RecyclerView.Adapter<StudentRowAdapter.Vi
 
         TextView className;
         TextView assignmentName;
+        TextView dueDate;
         LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             className = binding.className;
             assignmentName = binding.assignName;
+            dueDate = binding.dueDate;
             linearLayout = binding.layoutId;
         }
     }
