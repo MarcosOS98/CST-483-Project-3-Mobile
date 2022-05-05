@@ -31,6 +31,6 @@ public interface UserDAO {
     User getUsersByID(int UserID);
 
     //Sorts Users by Username
-    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUserName = :username")
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :username")
     User getUserByUsername(String username);
 }
