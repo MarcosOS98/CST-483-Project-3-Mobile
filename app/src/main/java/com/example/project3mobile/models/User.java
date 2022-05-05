@@ -1,4 +1,4 @@
-package com.example.project3mobile;
+package com.example.project3mobile.models;
 
 import android.widget.EditText;
 
