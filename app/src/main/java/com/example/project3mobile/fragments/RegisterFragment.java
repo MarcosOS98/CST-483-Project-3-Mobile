@@ -9,6 +9,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.room.Room;
 
 import com.example.project3mobile.R;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +19,18 @@ import android.widget.Toast;
 
 import com.example.project3mobile.AppStorage.AppDatabase;
 import com.example.project3mobile.AppStorage.UserDAO;
-import com.example.project3mobile.User;
+import com.example.project3mobile.api.ApiCalls;
+import com.example.project3mobile.models.User;
 import com.example.project3mobile.databinding.FragmentRegisterBinding;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
 
 public class RegisterFragment extends Fragment {
     private FragmentRegisterBinding binding;
@@ -134,5 +146,47 @@ public class RegisterFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    /**
+     * Registers a new User with the remote database via Retrofit2 call
+     * @param fName user first name
+     * @param lName user last name
+     * @param username user's chosen username
+     * @param password user's chosen password (pre-validated please)
+     * @param isProf whether user is a professor or not
+     */
+    public void registerUser(String fName, String lName, String username, String password, boolean isProf){
+        String apiBaseString = ""; // TODO: This is where the base url from heroku will be
+        ApiCalls api;
+
+        // okhttp3 for debug and log
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.level(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+        // creating Retrofit object for calls. Includes debug.
+        Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                .baseUrl(apiBaseString)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api = retrofit.create(ApiCalls.class);
+
+        // Async call for User
+        Call<String> userCall = api.createUser(fName, lName, username, password, isProf);
+        userCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("API","onResponse: User Successfully registered");
+                // TODO: Complete successful response code
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("FAIL","onFailure: Failed to register User");
+                // TODO: Complete unsuccessful response code
+            }
+        });
     }
 }

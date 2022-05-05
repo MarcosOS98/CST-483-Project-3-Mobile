@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,17 @@ import androidx.room.Room;
 import com.example.project3mobile.AppStorage.AppDatabase;
 import com.example.project3mobile.AppStorage.UserDAO;
 import com.example.project3mobile.R;
-import com.example.project3mobile.User;
+import com.example.project3mobile.api.ApiCalls;
+import com.example.project3mobile.models.User;
 import com.example.project3mobile.databinding.FragmentLoginBinding;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginFragment extends Fragment {
     private EditText mUsername;
@@ -110,5 +120,45 @@ public class LoginFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    /**
+     * Retrieves the User data from the remote database via Retrofit2, with okhttp3 for debug and
+     * logging
+     */
+    public void contactAPI(){
+        String apiBaseString = ""; // TODO: This is where the base url from heroku will be
+        ApiCalls api;
+
+        // okhttp3 for debug and log
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.level(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+        // creating Retrofit object for calls. Includes debug.
+        Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                .baseUrl(apiBaseString)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api = retrofit.create(ApiCalls.class);
+
+        // Async call for User
+        Call<User> userCall = api.getUser(123456); // TODO: API call wth username & password
+        userCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                Log.d("API","onResponse: User Successfully retrieved");
+                User user = response.body();
+                // TODO: Complete successful response code
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d("FAIL","onFailure: Failed to get User");
+                // TODO: Complete unsuccessful response code
+            }
+        });
+        // TODO: Work out how to async return user data
     }
 }
