@@ -1,5 +1,8 @@
 package com.example.project3mobile;
 
+import android.widget.EditText;
+
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -11,13 +14,41 @@ public class User {
 
     @PrimaryKey(autoGenerate = true)
     private int mUserId;
+
+    @ColumnInfo(name = "username")
     private String mUserName;
+
+    @ColumnInfo(name = "password")
     private String mPassword;
 
-    // Creates generic user Object
-    public User(String mUserName, String mPassword) {
+    @ColumnInfo(name = "first_name")
+    private String mFirstName;
+
+    @ColumnInfo(name = "last_name")
+    private String mLastName;
+
+    public User(String mFirstName, String mLastName, String mUserName, String mPassword) {
+        this.mFirstName = mFirstName;
+        this.mLastName = mLastName;
         this.mUserName = mUserName;
         this.mPassword = mPassword;
+    }
+
+
+    public String getFirstName() {
+        return mFirstName;
+    }
+
+    public void setFirstName(String mFirstName) {
+        this.mFirstName = mFirstName;
+    }
+
+    public String getLastName() {
+        return mLastName;
+    }
+
+    public void setLastName(String mLastName) {
+        this.mLastName = mLastName;
     }
 
     public int getUserId() {

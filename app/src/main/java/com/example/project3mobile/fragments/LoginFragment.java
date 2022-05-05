@@ -46,13 +46,13 @@ public class LoginFragment extends Fragment {
 
     private Boolean LoginDisplay() {
         getActivity();
-        mUsername = mUsername.findViewById(R.id.username);
-        mPassword = mPassword.findViewById(R.id.password);
-        mLoginBtn = mLoginBtn.findViewById(R.id.loginButton);
-        mRegisterBtn = mRegisterBtn.findViewById(R.id.registerButton);
+        mUsername = getView().findViewById(R.id.username);
+        mPassword = getView().findViewById(R.id.password);
+        mLoginBtn = getView().findViewById(R.id.loginButton);
+        mRegisterBtn = getView().findViewById(R.id.registerButton);
 
-        mUserString = (String) mUsername.getText().toString();
-        mPasswordString = (String) mPassword.getText().toString();
+        mUserString = mUsername.getText().toString();
+        mPasswordString = mPassword.getText().toString();
 
         if(checkDatabase()) {
             if(!mUser.getPassword().equals(mPasswordString)) {
