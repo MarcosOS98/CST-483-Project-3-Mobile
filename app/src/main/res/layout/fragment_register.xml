@@ -9,23 +9,11 @@
 
 
     <EditText
-        android:id="@+id/firstName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="68dp"
-        android:hint="@string/enterFirstName"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
         android:id="@+id/lastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="44dp"
         android:hint="@string/enterLastName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,10 +21,22 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
+        android:id="@+id/firstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="44dp"
+        android:hint="@string/enterFirstName"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="192dp"
         android:autofillHints="@string/prompt_email"
         android:hint="@string/prompt_username"
         android:inputType="textPersonName"
@@ -51,7 +51,7 @@
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:autofillHints="@string/prompt_password"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in"
@@ -60,7 +60,7 @@
         android:minHeight="48dp"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
@@ -68,7 +68,7 @@
         android:id="@+id/re_enter_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="100dp"
         android:autofillHints="@string/prompt_re_enter"
         android:hint="@string/prompt_re_enter"
         android:imeActionLabel="@string/action_sign_in"
@@ -97,7 +97,7 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="116dp"
         android:layout_marginEnd="48dp"
         android:text="@string/checkbox_text"
         app:layout_constraintEnd_toEndOf="parent"
