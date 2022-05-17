@@ -50,6 +50,12 @@ public class RegisterFragment extends Fragment {
     private String mPasswordString;
     private String mValidPassString;
 
+    public RegisterFragment() {
+        // Required empty public constructor
+    }
+
+    private boolean mIsProf;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,8 +70,8 @@ public class RegisterFragment extends Fragment {
         binding.registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkDatabase() && validatePasswords() && allFields()) {
-                    User newUser = new User(mFirstNameString, mLastNameString, mUsernameString, mPasswordString);
+                if (checkDatabase() && validatePasswords() && allFields() && checkBox()) {
+                    User newUser = new User(mFirstNameString, mLastNameString, mUsernameString, mPasswordString, mIsProf);
                     mUserDAO.insert(newUser);
                     NavHostFragment.findNavController(RegisterFragment.this)
                             .navigate(R.id.action_to_RegisterFragment_to_LoginFragment);
@@ -85,6 +91,16 @@ public class RegisterFragment extends Fragment {
         }
         return true;
     }
+
+    private boolean checkBox() {
+        if(binding.checkBox.isChecked()) {
+            mIsProf = true;
+        } else {
+            mIsProf = false;
+        }
+        return true;
+    }
+
     private boolean validatePasswords() {
         mPassword = getView().findViewById(R.id.password);
         mValidPass = getView().findViewById(R.id.re_enter_password);
