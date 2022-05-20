@@ -1,12 +1,27 @@
 package com.example.project3mobile.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.example.project3mobile.AppStorage.AppDatabase;
+
+@Entity(tableName = AppDatabase.ASSIGNMENT_TABLE)
 public class Assignment {
 
+    @PrimaryKey(autoGenerate = true)
     private Integer assignmentId;
 
+    @ColumnInfo(name = "assignment_name")
     private String assignmentName;
+
+    @ColumnInfo(name = "assignment_description")
     private String assignmentDescription;
+
+    @ColumnInfo(name = "due_date")
     private String dueDate;
+
+    @ColumnInfo(name = "is_complete")
     private Boolean isComplete;
 
     public Assignment() {

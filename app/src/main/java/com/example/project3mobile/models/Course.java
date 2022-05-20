@@ -1,16 +1,29 @@
 package com.example.project3mobile.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.example.project3mobile.AppStorage.AppDatabase;
+
 import java.util.List;
 
+@Entity(tableName = AppDatabase.COURSE_TABLE)
 public class Course {
 
+    @PrimaryKey(autoGenerate = true)
     private Integer courseId;
 
+    @ColumnInfo(name = "course_name")
     private String courseName;
+
+    @ColumnInfo(name = "course_time")
     private String courseTime;
+
+    @ColumnInfo(name = "professor")
     private String professor;
 
-    private List<Assignment> assignments;
+    //private List<Assignment> assignments;
 
     public Course() {
 
@@ -55,13 +68,13 @@ public class Course {
         this.professor = professor;
     }
 
-    public List<Assignment> getAssignments() {
-        return assignments;
-    }
+    //public List<Assignment> getAssignments() {
+        //return assignments;
+    //}
 
-    public void setAssignments(List<Assignment> assignments) {
-        this.assignments = assignments;
-    }
+//public void setAssignments(List<Assignment> assignments) {
+        //this.assignments = assignments;
+    //}
 
     @Override
     public String toString() {
@@ -70,7 +83,7 @@ public class Course {
                 ", courseName='" + courseName + '\'' +
                 ", courseTime='" + courseTime + '\'' +
                 ", professor='" + professor + '\'' +
-                ", assignments=" + assignments +
+                //", assignments=" + assignments +
                 '}';
     }
 }

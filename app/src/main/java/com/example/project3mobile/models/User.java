@@ -27,11 +27,15 @@ public class User {
     @ColumnInfo(name = "last_name")
     private String mLastName;
 
-    public User(String mFirstName, String mLastName, String mUserName, String mPassword) {
+    @ColumnInfo(name = "is_prof")
+    private boolean mIsProf;
+
+    public User(String mFirstName, String mLastName, String mUserName, String mPassword, boolean mIsProf) {
         this.mFirstName = mFirstName;
         this.mLastName = mLastName;
         this.mUserName = mUserName;
         this.mPassword = mPassword;
+        this.mIsProf = mIsProf;
     }
 
 
@@ -73,6 +77,13 @@ public class User {
 
     public void setPassword(String mPassword) {
         this.mPassword = mPassword;
+    }
+
+    public boolean isProf() {
+        return mIsProf;
+    }
+    public void setProf(boolean mIsProf) {
+        this.mIsProf = mIsProf;
     }
 
 }
